@@ -21,12 +21,12 @@ import numpy as np
 print("Enter (R)andom or (M)anual payoff enteries: ")
 entry = input()
 entry = entry.upper()
-print(entry)
 
 rows = int(input("Enter the number of rows: "))
 cols = int(input("Enter the number of cols: "))
 
-
+p1_strat = []
+p2_strat = []
 
 if entry == 'M':
     print("Add payoffs for player 1 by rows: ")
@@ -43,10 +43,14 @@ if entry == 'M':
         p2_payoff.append(int(input()))
     p2_strat = np.array(p2_payoff).reshape(rows, cols)
 
-print(p1_strat, "\n")
-print(p2_strat, "\n")
+for i in range(rows):
+    for j in range (cols):
+        if j == cols - 1:
+            print( "(" + str(p1_strat[i,j]) + "," + str(p2_strat[i,j]) + ")")
+        else:
+            print( "(" + str(p1_strat[i,j]) + "," + str(p2_strat[i,j]) + ")", end = " ")
 
-normal_form_game = np.hstack((p1_strat,p2_strat))
-print(normal_form_game)
+
+
 
 
