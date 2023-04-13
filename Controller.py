@@ -35,12 +35,12 @@ if entry == 'M':
     pays = cols * rows
     
     for i in range(pays):
-        p1_payoff.append(int(input()))
+        p1_payoff.append(str(input()))
     p1_strat = np.array(p1_payoff).reshape(rows, cols)
 
     print("Add payoffs for player 2 by rows: ")
     for i in range(pays):
-        p2_payoff.append(int(input()))
+        p2_payoff.append(str(input()))
     p2_strat = np.array(p2_payoff).reshape(rows, cols)
 
 for i in range(rows):
@@ -49,6 +49,37 @@ for i in range(rows):
             print( "(" + str(p1_strat[i,j]) + "," + str(p2_strat[i,j]) + ")")
         else:
             print( "(" + str(p1_strat[i,j]) + "," + str(p2_strat[i,j]) + ")", end = " ")
+
+
+print("\nFinding Nash EQ\n")
+
+
+max_p1 = p1_strat.max(axis = 0)
+#max_p1 = str(max(max_p1))
+
+
+#max_p2 = list(map(max,p2_strat[::,::]))
+max_p2 = p1_strat.max(axis = 0)
+#max_p2 = str(max(max_p2))
+
+print(max_p1, max_p2)
+
+for i in range(len(p1_strat)):
+    for k in range(len(max_p1)):
+        p1_strat[p1_strat == max_p1[k]] = 'H'
+
+for i in range(len(p2_strat)):
+        for k in range(len(max_p2)):
+         p2_strat[p2_strat == max_p2[k]] = 'H'
+
+for i in range(rows):
+    for j in range (cols):
+        if j == cols - 1:
+            print( "(" + str(p1_strat[i,j]) + "," + str(p2_strat[i,j]) + ")")
+        else:
+            print( "(" + str(p1_strat[i,j]) + "," + str(p2_strat[i,j]) + ")", end = " ")
+
+
 
 
 
