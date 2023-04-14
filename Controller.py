@@ -58,32 +58,107 @@ strategies_p2 = []
 for i in range(cols):
     strategies_p2.append('B'+ str(i))
 
-print("==="*pays)
-print("Player: Player 1's Strategies")
-print(strategies_p1)
-print("==="*pays)
-print("Player: Player 2's Strategies")
-print(strategies_p2)
-print("==="*pays)
-
-print("\n")
-print("Player 1's payoffs:\n", p1_payoff)
-print("===" * pays)
-print("player 2's payoffs:\n", p2_payoff)
-print("===" * pays)
-print("\n !!! DISPLAY NORMAL FORM !!!")
 
 
+
+
+#Printing Player 1's payoffs
+print("------------------------------------")
+print("Player: Player1's strategies")
+print("------------------------------------")
+print("{", end = "")
 for i in range(rows):
+    if i == rows - 1:
+        print("A" + str(i+1) + "}")
+    else:
+        print("A" + str(i+1) + ", ", end = "")
+
+print("\n------------------------------------")
+print("Player: Player1's payoffs")
+print("------------------------------------")
+flag = 0
+for i in range(len(p1_payoff)):
+    flag += 1
+    if flag == cols: 
+        print("%3s" % str(p1_payoff[i]))
+        flag = 0
+    else:
+        print("%3s" % str(p1_payoff[i]) + ", ", end = "")
+
+
+
+
+
+#Printing Player 2's payoffs
+print("\n------------------------------------")
+print("Player: Player2's strategies")
+print("------------------------------------")
+print("{", end = "")
+for i in range(cols):
+    if i == cols - 1: 
+        print("B" + str(i+1) + "}")
+    else:
+        print("B" + str(i+1) + ", ", end = "")
+
+print("\n------------------------------------")
+print("Player: Player2's payoffs")
+print("------------------------------------")
+flag = 0
+for i in range(len(p2_payoff)):
+    flag += 1
+    if flag == rows: 
+        print("%3s" % str(p2_payoff[i]))
+        flag = 0
+    else:
+        print("%3s" % str(p2_payoff[i]) + ", ", end = "")
+
+
+
+
+
+print("\n=======================================")
+print("Display Normal Form")
+print("=======================================")
+
+for i in range(cols):
+    if i < cols - 1:
+        print("            " + "B" + str(i + 1), end = "   ")
+    else:
+        print("            " + "B" + str(i + 1) + "     ")
+dashes = 15 * cols + 5
+print("   " + "-" * (dashes))
+
+#+ "," + str(p2_strat[i,j]) + ")", end = "")
+#+ "," + str(p2_strat[i,j]) + ")", end = "")
+rightpayoff = ""
+leftpayoff = ""
+for i in range(rows):
+    print("A" + str(i + 1) + " | ", end = "")
     for j in range (cols):
         if j == cols - 1:
-            print( "(" + str(p1_strat[i,j]) + "," + str(p2_strat[i,j]) + ")")
+            print("%4s" %  "(", end = "")
+            print("%3s" % str(p1_strat[i,j]), end = "")
+            rightpayoff =  str(p2_strat[i,j])
+            print("," + "{:<3}".format(rightpayoff), end = "")
+            print(")", end = "")
+            print("%4s" % "|")
         else:
-            print( "(" + str(p1_strat[i,j]) + "," + str(p2_strat[i,j]) + ")", end = " ")
+            print("%4s" %  "(", end ="")
+            print("%3s" % str(p1_strat[i,j]) + ",", end = "")
+            leftpayoff =  str(p2_strat[i,j])
+            print("{:<3}".format(leftpayoff), end = "")
+            print(")", end = "")
+            print("%4s" % "|", end = "")
+    print("   " + "-" * (dashes))
 
-print("===" * pays)
-print("\n !!! Finding Nash EQ !!! \n")
-print("===" * pays)
+
+
+
+
+
+print("\n=======================================")
+print("Nash Pure Equilibrium Locations")
+print("=======================================")
 
 t_p1 = []
 max_p1 = []
@@ -94,12 +169,6 @@ max_p1 = list(map(max,t_p1[::,::]))
 max_p2 = []
 max_p2 = list(map(max,p2_strat[::,::]))
 
-print("Player 1's best strategies for Nash EQ:\n", max_p1)
-print("===" * pays)
-print("player 2's best strategies for Nash EQ:\n", max_p2)
-print("===" * pays)
-
-
 for i in range(len(p1_strat)):
     for k in range(len(max_p1)):
         p1_strat[p1_strat == max_p1[k]] = 'H'
@@ -108,12 +177,37 @@ for i in range(len(p2_strat)):
        for k in range(len(max_p2)):
         p2_strat[p2_strat == max_p2[k]] = 'H'
 
-print("\n !!! Game Matrix with Nash EQ !!! \n")
-print("===" * pays)
+for i in range(cols):
+    if i < cols - 1:
+        print("           " + "B" + str(i + 1), end = "  ")
+    else:
+        print("            " + "B" + str(i + 1) + "     ")
+dashes = 15 * cols + 5
+print("   " + "-" * (dashes))
+
 for i in range(rows):
+    print("A" + str(i + 1) + " | ", end = "")
     for j in range (cols):
         if j == cols - 1:
-            print( "(" + str(p1_strat[i,j]) + "," + str(p2_strat[i,j]) + ")")
+            print("%4s" %  "(", end = "")
+            print("%3s" % str(p1_strat[i,j]), end = "")
+            rightpayoff =  str(p2_strat[i,j])
+            print("," + "{:<3}".format(rightpayoff), end = "")
+            print(")", end = "")
+            print("%4s" % "|")
         else:
-            print( "(" + str(p1_strat[i,j]) + "," + str(p2_strat[i,j]) + ")", end = " ")
-print("===" * pays)
+            print("%4s" %  "(", end ="")
+            print("%3s" % str(p1_strat[i,j]) + ",", end = "")
+            leftpayoff =  str(p2_strat[i,j])
+            print("{:<3}".format(leftpayoff), end = "")
+            print(")", end = "")
+            print("%4s" % "|", end = "")
+    print("   " + "-" * (dashes))
+
+print("Nash Pure Equilibriums(s): ", end = "")
+for i in range(rows):
+    for j in range(cols):
+        if p1_strat[i,j] == "H" and p2_strat[i,j] == "H":
+            print("(A" + str(i + 1) + ", B" + str(j + 1) + ") ", end = "")
+
+print("")
