@@ -181,8 +181,7 @@ print("=======================================")
 
 temp = 0
 temp_var = 0
-flag = 1
-start = 1
+
 max_xi = 0
 max_xj = 0
 for i in range(rows):
