@@ -67,8 +67,10 @@ elif entry == 'R':
         p2_strat.append(i)
     p2_strat = np.array(p2_payoff).reshape(rows, cols)
 
-p1_strat = np.char.mod('%d', p1_strat)
-p2_strat = np.char.mod('%d', p2_strat)
+    p1_strat = np.char.mod('%d', p1_strat)
+    p2_strat = np.char.mod('%d', p2_strat)
+
+
 
 strategies_p1 = []
 for i in range(rows):
