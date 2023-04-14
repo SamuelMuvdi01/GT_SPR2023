@@ -28,6 +28,7 @@ cols = int(input("Enter the number of cols: "))
 p1_strat = []
 p2_strat = []
 
+
 if entry == 'M':
     print("Add payoffs for player 1 by rows: ")
     p1_payoff = []
@@ -43,12 +44,101 @@ if entry == 'M':
         p2_payoff.append(int(input()))
     p2_strat = np.array(p2_payoff).reshape(rows, cols)
 
+
+
+
+
+#Printing Player 1's payoffs
+print("------------------------------------")
+print("Player: Player1's strategies")
+print("------------------------------------")
+print("{", end = "")
 for i in range(rows):
+    if i == rows - 1:
+        print("A" + str(i+1) + "}")
+    else:
+        print("A" + str(i+1) + ", ", end = "")
+
+print("\n------------------------------------")
+print("Player: Player1's payoffs")
+print("------------------------------------")
+flag = 0
+for i in range(len(p1_payoff)):
+    flag += 1
+    if flag == cols: 
+        print("%3s" % str(p1_payoff[i]))
+        flag = 0
+    else:
+        print("%3s" % str(p1_payoff[i]) + ", ", end = "")
+
+
+
+
+
+#Printing Player 2's payoffs
+
+print("\n------------------------------------")
+print("Player: Player2's strategies")
+print("------------------------------------")
+print("{", end = "")
+for i in range(cols):
+    if i == cols - 1: 
+        print("B" + str(i+1) + "}")
+    else:
+        print("B" + str(i+1) + ", ", end = "")
+
+print("\n------------------------------------")
+print("Player: Player2's payoffs")
+print("------------------------------------")
+flag = 0
+for i in range(len(p2_payoff)):
+    flag += 1
+    if flag == rows: 
+        print("%3s" % str(p2_payoff[i]))
+        flag = 0
+    else:
+        print("%3s" % str(p2_payoff[i]) + ", ", end = "")
+
+
+
+print("\n=======================================")
+print("Display Normal Form")
+print("=======================================")
+
+for i in range(cols):
+    if i < cols - 1:
+        print("            " + "B" + str(i + 1), end = "   ")
+    else:
+        print("            " + "B" + str(i + 1) + "     ")
+dashes = 15 * cols + 5
+print("   " + "-" * (dashes))
+
+#+ "," + str(p2_strat[i,j]) + ")", end = "")
+#+ "," + str(p2_strat[i,j]) + ")", end = "")
+rightpayoff = ""
+leftpayoff = ""
+for i in range(rows):
+    print("A" + str(i + 1) + " | ", end = "")
     for j in range (cols):
         if j == cols - 1:
-            print( "(" + str(p1_strat[i,j]) + "," + str(p2_strat[i,j]) + ")")
+            print("%4s" %  "(", end = "")
+            print("%3s" % str(p1_strat[i,j]), end = "")
+            rightpayoff =  str(p2_strat[i,j])
+            print("," + "{:<3}".format(rightpayoff), end = "")
+            print(")", end = "")
+            print("%4s" % "|")
         else:
-            print( "(" + str(p1_strat[i,j]) + "," + str(p2_strat[i,j]) + ")", end = " ")
+            print("%4s" %  "(", end ="")
+            print("%3s" % str(p1_strat[i,j]) + ",", end = "")
+            leftpayoff =  str(p2_strat[i,j])
+            print("{:<3}".format(leftpayoff), end = "")
+            print(")", end = "")
+            print("%4s" % "|", end = "")
+    print("   " + "-" * (dashes))
+
+
+
+
 
 
 
