@@ -199,8 +199,13 @@ for i in range(rows):
             # print("new max is: " + str(temp))
             max_xi = i
             max_xj = j
-    p2_strat[max_xi,max_xj] = 'H'
+    temp_duplicate = p2_strat[max_xi, max_xj]
+    for k in range(rows):
+        if p2_strat[max_xi,k] == temp_duplicate:
+            p2_strat[max_xi,k] = 'H'
+    #p2_strat[max_xi,max_xj] = 'H'
 
+temp_duplicate = 0
 for j in range(cols):
     temp = p1_strat[0,j]
     max_xi = 0
@@ -216,7 +221,11 @@ for j in range(cols):
             #print("new max is: " + str(temp))
             max_xi = i
             max_xj = j
-    p1_strat[max_xi,max_xj] = 'H'
+    temp_duplicate = p1_strat[max_xi, max_xj]
+    for k in range(cols):
+        if p1_strat[k,max_xj] == temp_duplicate:
+            p1_strat[k,max_xj] = 'H'
+    #p1_strat[max_xi,max_xj] = 'H'
     #print(str(max_xi) + " " + str(max_xj))
     #print(p1_strat[max_xi,max_xj])
 
