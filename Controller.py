@@ -161,23 +161,64 @@ print("\n=======================================")
 print("Nash Pure Equilibrium Locations")
 print("=======================================")
 
-t_p1 = []
-max_p1 = []
-t_p1 = p1_strat.transpose(1, 0)
-max_p1 = list(map(max,t_p1[::,::]))
-print(max_p1)
+# t_p1 = []
+# max_p1 = []
+# t_p1 = p1_strat.transpose(1, 0)
+# max_p1 = list(map(max,t_p1[::,::]))
+# print(max_p1)
 
-max_p2 = []
-max_p2 = list(map(max,p2_strat[::,::]))
-print(max_p2)
+# max_p2 = []
+# max_p2 = list(map(max,p2_strat[::,::]))
+# print(max_p2)
 
-for i in range(len(p1_strat)):
-    for k in range(len(max_p1)):
-        p1_strat[p1_strat == max_p1[k]] = 'H'
+# for i in range(len(p1_strat)):
+#     for k in range(len(max_p1)):
+#         p1_strat[p1_strat == max_p1[k]] = 'H'
 
-for i in range(len(p2_strat)):
-       for k in range(len(max_p2)):
-        p2_strat[p2_strat == max_p2[k]] = 'H'
+# for i in range(len(p2_strat)):
+#        for k in range(len(max_p2)):
+#         p2_strat[p2_strat == max_p2[k]] = 'H'
+
+temp = 0
+temp_var = 0
+flag = 1
+start = 1
+max_xi = 0
+max_xj = 0
+for i in range(rows):
+    temp = p1_strat[i,0]
+    max_xi = i
+    max_xj = 0
+    # print("first Xs: " + str(temp))
+    for j in range(cols):
+        temp_var = p1_strat[i,j]
+        # print("checking if " + str(temp_var) + " is bigger than " + str(temp))
+        # print(temp_var)
+        # print(temp)
+        if int(temp_var) > int(temp):
+            temp = temp_var
+            # print("new max is: " + str(temp))
+            max_xi = i
+            max_xj = j
+    p1_strat[max_xi,max_xj] = 'H'
+
+for j in range(cols):
+    temp = p2_strat[i,0]
+    max_xi = i
+    max_xj = 0
+    # print("first Xs: " + str(temp))
+    for i in range(rows):
+        temp_var = p2_strat[i,j]
+        # print("checking if " + str(temp_var) + " is bigger than " + str(temp))
+        # print(temp_var)
+        # print(temp)
+        if int(temp_var) > int(temp):
+            temp = temp_var
+            # print("new max is: " + str(temp))
+            max_xi = i
+            max_xj = j
+    p2_strat[max_xi,max_xj] = 'H'
+
 
 for i in range(cols):
     if i < cols - 1:
