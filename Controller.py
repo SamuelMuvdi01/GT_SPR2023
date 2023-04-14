@@ -19,6 +19,7 @@
 
 import numpy as np
 import pandas as pd
+from numpy import random
 
 print("Enter (R)andom or (M)anual payoff enteries: ")
 entry = input()
@@ -34,12 +35,11 @@ while rows < 1 or rows > 9 and cols < 1 or cols > 9:
 
 p1_strat = []
 p2_strat = []
-
+p1_payoff = []
+p2_payoff = []
 
 if entry == 'M':
     print("Add payoffs for player 1 by rows: ")
-    p1_payoff = []
-    p2_payoff = []
     pays = cols * rows
     
     for i in range(pays):
@@ -50,6 +50,25 @@ if entry == 'M':
     for i in range(pays):
         p2_payoff.append(str(input()))
     p2_strat = np.array(p2_payoff).reshape(rows, cols)
+
+
+elif entry == 'R':
+    print('\nGenerating Game of ', rows , 'rows and ' ,  cols , 'columns:\n')
+    pays = cols * rows
+
+    p1_payoff= random.randint(-99, 99, pays)
+    for i in p1_payoff:
+        p1_strat.append(i)
+    p1_strat = np.array(p1_payoff).reshape(rows, cols)
+
+    
+    p2_payoff= random.randint(-99, 99,pays)
+    for z in p2_payoff:
+        p2_strat.append(i)
+    p2_strat = np.array(p2_payoff).reshape(rows, cols)
+
+p1_strat = np.char.mod('%d', p1_strat)
+p2_strat = np.char.mod('%d', p2_strat)
 
 strategies_p1 = []
 for i in range(rows):
