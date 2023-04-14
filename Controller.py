@@ -164,10 +164,11 @@ t_p1 = []
 max_p1 = []
 t_p1 = p1_strat.transpose(1, 0)
 max_p1 = list(map(max,t_p1[::,::]))
-
+print(max_p1)
 
 max_p2 = []
 max_p2 = list(map(max,p2_strat[::,::]))
+print(max_p2)
 
 for i in range(len(p1_strat)):
     for k in range(len(max_p1)):
@@ -179,7 +180,7 @@ for i in range(len(p2_strat)):
 
 for i in range(cols):
     if i < cols - 1:
-        print("           " + "B" + str(i + 1), end = "  ")
+        print("            " + "B" + str(i + 1), end = "   ")
     else:
         print("            " + "B" + str(i + 1) + "     ")
 dashes = 15 * cols + 5
